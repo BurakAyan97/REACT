@@ -1,0 +1,22 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* flex direction column olursa y ekseni sağ sol yapar. O da align items ile yapılır. row olsaydı justify content center yapardık */
+}
+
+.appButton {
+  width: 25%;
+  background-color: blue;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 1px solid blue;
+}
+
+.courseList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
