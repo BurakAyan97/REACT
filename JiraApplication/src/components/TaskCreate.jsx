@@ -1,5 +1,10 @@
 import { useState } from "react";
-function TaskCreate({ onCreate, task, taskformUpdate, onUpdate }) {
+import { useContext } from "react";
+import TaskContext from "../Context/task";
+
+function TaskCreate({ task, taskformUpdate, onUpdate }) {
+  const { createTask, editTaskById } = useContext(TaskContext);
+
   const [title, setTitle] = useState(task ? task.title : "");
 
   const [taskDesc, setTaskDesc] = useState(task ? task.taskDesc : "");
@@ -16,8 +21,11 @@ function TaskCreate({ onCreate, task, taskformUpdate, onUpdate }) {
     event.preventDefault(); //Sayfanın refreshlenmesini engeller
     if (taskformUpdate) {
       onUpdate(task.id, title, taskDesc);
+      // editTaskById(task.id, title, taskDesc);
     } else {
-      onCreate(title, taskDesc); //App.jsx e değerleri göndermek için hazırladığımız props.Method veya fonksiyon değil dikkat et!!!.Title ve taskDesc gönderiyoruz.
+      //App.jsx e değerleri göndermek için hazırladığımız props.Method veya fonksiyon değil dikkat et!!!.Title ve taskDesc gönderiyoruz.
+      // onCreate(title, taskDesc);
+      createTask(title, taskDesc);
     }
     setTitle("");
     setTaskDesc(""); //Oluştura tıklayınca inputları boş string yapıyoruz.
@@ -46,7 +54,7 @@ function TaskCreate({ onCreate, task, taskformUpdate, onUpdate }) {
               className="task-button update-button"
               onClick={handleSubmit}
             >
-              Oluştur
+              Düzenle
             </button>
           </form>
         </div>
@@ -68,7 +76,7 @@ function TaskCreate({ onCreate, task, taskformUpdate, onUpdate }) {
               rows={5}
             ></textarea>
             <button className="task-button" onClick={handleSubmit}>
-              Düzenle
+              Oluştur
             </button>
           </form>
         </div>
